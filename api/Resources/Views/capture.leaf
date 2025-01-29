@@ -6,18 +6,14 @@
 </head>
 
 <body>
-  <h1>Greenfield Speeders</h1>
+  <h1><a href="/">Greenfield Speeders</a></h1>
   <div class="wrapper">
-    #for(capture in captures):
-      <a href="/capture/#(capture.id)">
       <div class=item>
         <img class="image" src=https://loadql.dev/cdn-cgi/imagedelivery/QcwQm0dWPprrgKR8Ke1MXw/#(capture.fileId)/public></p>
         <p>Speed: #(capture.speed) MPH</p>
         <p>Date: #date(capture.createdAt, "MMMM D yyyy hh:mm:ss a", "America/Chicago")</p>
         <p>License Plate: #uppercased(capture.licensePlate)</p>
       </div>
-      </a>
-    #endfor
   </div>
 </body>
 </html>

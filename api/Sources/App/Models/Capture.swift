@@ -19,31 +19,31 @@ final class Capture: Model, @unchecked Sendable {
     @Field(key: "speed")
     var speed: Int8
 
-    @Field(key: "licensePlate")
-    var licensePlate: String?
-
-    @Timestamp(key: "createdAt", on: .create, format: .iso8601)
+    @Timestamp(key: "createdAt", on: .create, format: .default)
     var createdAt: Date?
 
-    @Timestamp(key: "updatedAt", on: .update, format: .iso8601)
+    @Timestamp(key: "updatedAt", on: .update, format: .default)
     var updatedAt: Date?
+
+    @Field(key: "vehicle")
+    var vehicle: VehicleDetail?
 
     init() {}
 
-    init(id: UUID? = nil, speed: Int8, licensePlate: String) {
+    init(id: UUID? = nil, speed: Int8) {
+        self.vehicle = VehicleDetail()
         self.id = id
         self.$speed.value = speed
-        self.$licensePlate.value = licensePlate
     }
 
     func toDTO() -> CaptureDTO {
         .init(
             id: self.id,
             speed: self.speed,
-            licensePlate: self.licensePlate,
             createdAt: self.createdAt,
             updatedAt: self.updatedAt,
-            fileId: self.fileId
+            fileId: self.fileId,
+            licensePlate: self.vehicle?.licensePlate
         )
     }
 }

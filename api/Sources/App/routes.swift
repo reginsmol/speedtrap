@@ -1,9 +1,12 @@
 import Fluent
 import Vapor
 
-struct WelcomeContext: Encodable {
-    var title: String
+struct IndexContext: Encodable {
     var captures: [CaptureDTO]
+}
+
+struct CaptureContext: Encodable {
+    var capture: CaptureDTO
 }
 
 func routes(_ app: Application) throws {
@@ -17,7 +20,7 @@ func routes(_ app: Application) throws {
             .map { $0.toDTO() }
 
         return try await req.view.render(
-            "index", WelcomeContext(title: "Hello World", captures: captures))
+            "index", IndexContext(captures: captures))
     }
 
     app.get("capture", ":id") { req async throws -> View in
@@ -30,7 +33,7 @@ func routes(_ app: Application) throws {
         }
 
         return try await req.view.render(
-            "index", WelcomeContext(title: "Hello World", captures: [capture.toDTO()]))
+            "capture", CaptureContext(capture: capture.toDTO()))
     }
 
     // try app.register(collection: TodoController())
