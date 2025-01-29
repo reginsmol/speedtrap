@@ -49,10 +49,12 @@ struct CaptureController: RouteCollection {
 
         let vehicle: AlprResponseDTO = try alprResponse.content.decode(AlprResponseDTO.self)
 
-        capture.vehicle = VehicleDetail()
-        capture.vehicle?.confidence = vehicle.results[0].score
-        capture.vehicle?.region = vehicle.results[0].region.code
-        capture.vehicle?.licensePlate = vehicle.results[0].plate
+        if vehicle.results.indices.contains(0) {
+            capture.vehicle = VehicleDetail()
+            capture.vehicle?.confidence = vehicle.results[0].score
+            capture.vehicle?.region = vehicle.results[0].region.code
+            capture.vehicle?.licensePlate = vehicle.results[0].plate
+        }
 
         try await capture.save(on: req.db)
 

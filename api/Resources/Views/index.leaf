@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Greenfield Speeders</title>
+  <title>Greenfield Speeders by the Bay</title>
 </head>
 
 <body>
-  <h1>Greenfield Speeders</h1>
+  <h1>Greenfield Speeders by the Bay</h1>
   <div class="wrapper">
     #for(capture in captures):
       <a href="/capture/#(capture.id)">
       <div class=item>
-        <img class="image" src=https://loadql.dev/cdn-cgi/imagedelivery/QcwQm0dWPprrgKR8Ke1MXw/#(capture.fileId)/public></p>
+        <img class="image" src=https://greenfieldsbythebay.com/cdn-cgi/imagedelivery/QcwQm0dWPprrgKR8Ke1MXw/#(capture.fileId)/public></p>
         <p>Speed: #(capture.speed) MPH</p>
         <p>Date: #date(capture.createdAt, "MMMM D yyyy hh:mm:ss a", "America/Chicago")</p>
-        <p>License Plate: #uppercased(capture.licensePlate)</p>
+        #if(capture.licensePlate):
+          <p>License Plate: #uppercased(capture.licensePlate)</p>
+        #else:
+          No Plate
+        #endif
       </div>
       </a>
     #endfor

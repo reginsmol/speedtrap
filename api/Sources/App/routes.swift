@@ -37,5 +37,7 @@ func routes(_ app: Application) throws {
     }
 
     // try app.register(collection: TodoController())
-    try app.register(collection: CaptureController())
+    let group = app.grouped(AuthMiddleware())
+    
+    try group.register(collection: CaptureController())
 }

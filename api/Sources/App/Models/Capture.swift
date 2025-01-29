@@ -25,7 +25,7 @@ final class Capture: Model, @unchecked Sendable {
     @Timestamp(key: "updatedAt", on: .update, format: .default)
     var updatedAt: Date?
 
-    @Field(key: "vehicle")
+    @OptionalField(key: "vehicle")
     var vehicle: VehicleDetail?
 
     init() {}
@@ -43,7 +43,7 @@ final class Capture: Model, @unchecked Sendable {
             createdAt: self.createdAt,
             updatedAt: self.updatedAt,
             fileId: self.fileId,
-            licensePlate: self.vehicle?.licensePlate
+            licensePlate: self.vehicle?.licensePlate ?? nil
         )
     }
 }
